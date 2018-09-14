@@ -1,0 +1,22 @@
+* serverapi
+  + controllers
+  + model
+    + cliente {
+      Id: 999999,
+      NomeCliente: '',
+      DataNasc: '',
+    }
+  + routes (web api)
+    + /cliente
+    + /cliente/:id
+    + /cliente/new/
+    + /cliente/edit/:id
+    + /cliente/del/:id
+
+    + /mercadoria
+    + /mercadoria/:id
+    + /mercadoria/new/
+    + /mercadoria/edit/:id
+    + /mercadoria/del/:id
+
+* web
