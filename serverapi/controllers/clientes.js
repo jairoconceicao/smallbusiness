@@ -19,6 +19,8 @@ module.exports = (function(){
         DataNasc: '1975-11-06'
       });
 
+      console.log('Getting Clientes...');
+      
       res.json(obj);
     },
   
