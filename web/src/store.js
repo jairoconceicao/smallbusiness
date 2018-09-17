@@ -18,14 +18,7 @@ export default new Vuex.Store({
 
   actions: {
     getClientesListAction({commit}) {
-      axios({
-        url: `http://localhost:3000/cliente`,
-        method: 'GET',
-        responseType: 'json',
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8'
-        }
-      })
+      axios.get('http://localhost:3000/cliente')
       .then( (response) => commit('setClientesList', response.data) )
     }
   }
