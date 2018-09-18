@@ -1,26 +1,47 @@
-  + entity
-    + person
-    + customer
-    + supplier
-    + transporter
-    + employee
-    + commodity (mercadoria)
-    + product
-    + byproduct (subproduto)
-    + feedstock (materia-prima)
-    + inputs (insumos)
-    + service
-    + stock (estoque)
-    + sales_order (pedido de vendas)
-    + invoice (fatura, nota fiscal)
-    + budget (orçamento)
-    + bank_account (conta bancaria)
-    + purchase_order (pedido de compras)
-  
-  + relationships
-    + sales
-    + purchase
-    + bills (contas a receber e pagar)
-    + taxes (impostos)
-    + labor_benefits (encargos trabalhistas)
-    
++ entity
+  + person
+  + customer
+  + supplier
+  + transporter
+  + employee
+  + commodity (mercadoria)
+  + product
+  + byproduct (subproduto)
+  + feedstock (materia-prima)
+  + inputs (insumos)
+  + service
+  + stock (estoque)
+  + sales_order (pedido de vendas)
+  + invoice (fatura, nota fiscal)
+  + budget (orçamento)
+  + bid (proposta comercial)
+  + bank_account (conta bancaria)
+  + purchase_order (pedido de compras)
+
++ relationships
+  + sales
+  + purchase
+  + bills (contas a receber e pagar)
+  + taxes (impostos)
+  + labor_benefits (encargos trabalhistas)
+
+
+person {
+
+} 
+
+customer : person {
+
+}
+
+supplier : person {
+
+}
+
+transporter : person {
+
+}
+
+employee : person {
+
+}
