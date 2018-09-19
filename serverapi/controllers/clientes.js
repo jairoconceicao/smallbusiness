@@ -23,6 +23,17 @@ module.exports = (function(){
     },
   
     create: function(req, res) {
+      var form = res.body;
+      
+      MongoClient.connect(urldb, function(err, client){
+        console.log('Saving Cliente...');
+        const db = client.db(dbname);
+
+        db.collection('person').insertOne(form);
+
+        client.close();
+        
+      });
   
     },
   

@@ -5,6 +5,10 @@ const clienteController = require('./controllers/clientes');
 
 const app = express();
 
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -19,5 +23,9 @@ app.get('/', function(req, res){
 app.get('/cliente', function(req, res){
   clienteController.list(req, res);
 })
+
+app.post('/cliente/new', function(req, res){
+  clienteController.create(req, res);
+});
 
 app.listen(port);
