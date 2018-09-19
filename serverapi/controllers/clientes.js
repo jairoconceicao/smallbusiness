@@ -9,16 +9,16 @@ module.exports = (function(){
         console.log('Getting Clientes...');
 
         const db = client.db(dbname);
-        let obj = [];
 
-        db.collection('person')
-          .find({})
-          .toArray(function(err, docs){
-            obj = docs;
-          });
-        res.json(obj);
-
-        client.close();
+        new Promise((resolve, reject) => {
+          let obj = db.collection('person')
+                      .find()
+                      .toArray();
+          resolve(obj);
+        }).then( data => {
+          client.close();
+          res.json(data);
+        });
       });
     },
   
