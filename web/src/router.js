@@ -10,17 +10,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: Home
     },
     {
       path: '/clientes',
-      name: 'Clientes',
+      name: 'Lista de Clientes',
       component: Clientes
     },
     {
       path: '/clientes/new',
-      name: 'Clientes',
+      name: 'Novo Cliente',
       component: ClientesNew
     },
     {

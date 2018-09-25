@@ -25,23 +25,3 @@
   + taxes (impostos)
   + labor_benefits (encargos trabalhistas)
 
-
-person {
-
-} 
-
-customer : person {
-
-}
-
-supplier : person {
-
-}
-
-transporter : person {
-
-}
-
-employee : person {
-
-}

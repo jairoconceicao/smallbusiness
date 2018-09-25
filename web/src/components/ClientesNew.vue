@@ -1,12 +1,11 @@
 <template>
-  <section class="container">
-    <h1>Novo</h1>
+  <form class="container">
     <div class="row">
-      <div v-for="(ctrl, index) in formElements" :key="index" :class="ctrl['layout']">
-        <label>{{ctrl['label']}}</label>
-        <input v-if="ctrl['type'] === 'text'" type="text" class="form-control" v-model="dataModel[index]" />
+      <div :class="(ctrl['type'] === 'check' ? `form-check form-group ${ctrl['layout']}`  : `form-group ${ctrl['layout']}`)" v-for="(ctrl, index) in formElements" :key="index">
+        <label :class="ctrl['type'] === 'check' ? 'form-check-label' : ''" :for="`cmp${index}`">{{ctrl['label']}}</label>
+        <input :id="`cmp${index}`" v-if="ctrl['type'] === 'check'" type="checkbox" class="form-check-input" v-model="dataModel[index]" />
 
-        <input v-else-if="ctrl['type'] === 'check'" type="checkbox" class="form-check" v-model="dataModel[index]" />
+        <input v-else-if="ctrl['type'] === 'text'" type="text" class="form-control" v-model="dataModel[index]" />
 
         <div v-else-if="ctrl['type'] === 'radio'">
           <div v-for="item in ctrl['enum']" :key="item" class="form-check">
@@ -19,28 +18,63 @@
         <select v-else-if="ctrl['type'] === 'select'" class="form-control" v-model="dataModel[index]">
           <option v-for="option in ctrl['enum']" :value="option" :key="option"> {{option}} </option>
         </select>
+
+        <div v-else-if="ctrl['type'] === 'date'" class="input-group">
+          <input type="text" class="form-control" :value="dataModel[index]"/>
+          <div  class="input-group-append">
+            <button 
+              class="btn btn-outline" 
+              @click="showPicker = !showPicker"
+            >
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+          <date-picker
+            color="#236AB9"
+            @close="showPicker = false"
+            @input="$emit('input', value)"
+            v-if="showPicker" 
+            v-model="dataModel[index]" 
+          ></date-picker>
+        </div>
+
+        <div v-else-if="ctrl['type'] === 'collection'">
+          <button type="button" class="btn">
+            <i class="fa fa-plus"></i>
+          </button>
+          <table>
+            <tr>
+              <td></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <button type="button" class="btn btn-primary">Salvar</button>
+    <div>
+      <button type="button" class="btn btn-success">Salvar</button>
+      <button type="button" class="btn btn-danger">Cancelar</button>
     </div>
-  </section>
+  </form>
 </template>
 
 <script>
-import Model from '../models/person.json'
+import DatePicker  from 'vue-md-date-picker'
+import Model from '../models/formelements.json'
 
 export default {
-  name: 'ClientesNew',
+  components: {
+    DatePicker
+  },
 
   computed: {
     formElements() {
-      return Model;
+      return Model['person'];
     }
   },
 
   data() {
     return {
+      showPicker: null,
       dataModel : { }
     }
   }
