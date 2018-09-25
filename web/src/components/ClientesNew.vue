@@ -6,7 +6,7 @@
         <label>{{ctrl['label']}}</label>
         <input v-if="ctrl['type'] === 'text'" type="text" class="form-control" v-model="dataModel[index]" />
 
-        <input v-else-if="ctrl['type'] === 'check'" type="checkbox" class="form-control" v-model="dataModel[index]" />
+        <input v-else-if="ctrl['type'] === 'check'" type="checkbox" class="form-check" v-model="dataModel[index]" />
 
         <div v-else-if="ctrl['type'] === 'radio'">
           <div v-for="item in ctrl['enum']" :key="item" class="form-check">
