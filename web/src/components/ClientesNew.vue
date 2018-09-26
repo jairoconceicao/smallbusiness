@@ -1,60 +1,71 @@
 <template>
-  <form class="container">
-    <div class="row">
-      <div :class="(ctrl['type'] === 'check' ? `form-check form-group ${ctrl['layout']}`  : `form-group ${ctrl['layout']}`)" v-for="(ctrl, index) in formElements" :key="index">
-        <label :class="ctrl['type'] === 'check' ? 'form-check-label' : ''" :for="`cmp${index}`">{{ctrl['label']}}</label>
-        <input :id="`cmp${index}`" v-if="ctrl['type'] === 'check'" type="checkbox" class="form-check-input" v-model="dataModel[index]" />
+  <v-layout row>
+    <v-flex :class="ctrl['layout']" v-for="(ctrl, index) in formElements" :key="index">
+      <v-switch v-if="ctrl['type'] === 'check'" :label="ctrl['label']" v-model="dataModel[index]"></v-switch>
+      <v-radio-group v-else-if="ctrl['type'] === 'radio'" :label="ctrl['label']" v-model="dataModel[index]">
+        <v-radio
+          v-for="(item, n) in ctrl['enum']"
+          :key="n"
+          :label="item"
+          :value="n"
+        ></v-radio>
+      </v-radio-group>
+      <v-select v-else-if="ctrl['type'] === 'select'"
+        box
+        :items="ctrl['enum']"
+        :label="ctrl['label']"
+        v-model="dataModel[index]"
+      ></v-select>      
+      <v-dialog v-else-if="ctrl['type'] === 'date'"
+        ref="dialog"
+        v-model="showPicker"
+        :return-value.sync="date"
+        persistent
+        lazy
+        full-width
+        width="290px"
+      >
+        <v-text-field
+          slot="activator"
+          v-model="dataModel[index]"
+          :label="ctrl['label']"
+          append-icon="fa fa-calendar"
+          solo
+          readonly
+        ></v-text-field>
+        <v-date-picker v-model="dataModel[index]" scrollable>
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click="showPicker = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+        </v-date-picker>
+      </v-dialog>
+      
+      <v-text-field v-else-if="ctrl['type'] === 'text'"
+        v-model="dataModel[index]"
+        :label="ctrl['label']"
+        solo
+      ></v-text-field>
 
-        <input v-else-if="ctrl['type'] === 'text'" type="text" class="form-control" v-model="dataModel[index]" />
+      <v-textarea v-else-if="ctrl['type'] === 'textarea'"
+          v-model="dataModel[index]"
+          solo
+          name="input-7-4"
+          :label="ctrl['label']"
+          value=""
+        ></v-textarea>
 
-        <div v-else-if="ctrl['type'] === 'radio'">
-          <div v-for="item in ctrl['enum']" :key="item" class="form-check">
-            <input type="radio" class="form-check-input" v-model="dataModel[index]" />
-            <label class="form-check-label">{{item}}</label>
-          </div>
-        </div>
-
-        <textarea v-else-if="ctrl['type'] === 'textarea'" class="form-control" v-model="dataModel[index]"></textarea>
-        <select v-else-if="ctrl['type'] === 'select'" class="form-control" v-model="dataModel[index]">
-          <option v-for="option in ctrl['enum']" :value="option" :key="option"> {{option}} </option>
-        </select>
-
-        <div v-else-if="ctrl['type'] === 'date'" class="input-group">
-          <input type="text" class="form-control" :value="dataModel[index]"/>
-          <div  class="input-group-append">
-            <button 
-              class="btn btn-outline" 
-              @click="showPicker = !showPicker"
-            >
-              <i class="fa fa-calendar"></i>
-            </button>
-          </div>
-          <date-picker
-            color="#236AB9"
-            @close="showPicker = false"
-            @input="$emit('input', value)"
-            v-if="showPicker" 
-            v-model="dataModel[index]" 
-          ></date-picker>
-        </div>
-
-        <div v-else-if="ctrl['type'] === 'collection'">
-          <button type="button" class="btn">
-            <i class="fa fa-plus"></i>
-          </button>
-          <table>
-            <tr>
-              <td></td>
-            </tr>
-          </table>
-        </div>
+      <div v-else-if="ctrl['type'] === 'collection'">
+        <button type="button" class="btn">
+          <i class="fa fa-plus"></i>
+        </button>
+        <table>
+          <tr>
+            <td></td>
+          </tr>
+        </table>
       </div>
-    </div>
-    <div>
-      <button type="button" class="btn btn-success">Salvar</button>
-      <button type="button" class="btn btn-danger">Cancelar</button>
-    </div>
-  </form>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
