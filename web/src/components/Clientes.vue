@@ -3,81 +3,99 @@
     <v-flex xs12>
       <v-toolbar flat color="white">
         <v-spacer></v-spacer>
-        <v-btn color="primary" flat @click="$router.push('/clientes/new')">
+        <v-btn flat color="primary" @click="$router.push('/clientes/new')">
           <v-icon>fa fa-plus</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-data-table :items="dataset" :headers="headset">
+      <v-data-table :items="dataset" :headers="headset" item-key="Codigo">
         <template slot="items" slot-scope="props">
-          <td>{{ props.item['TipoPessoa'] }}</td>
-          <td>{{ props.item['Codigo'] | padZero(9) }}</td>
-          <td>{{ props.item['CpfCnpj'] }}</td>
-          <td>{{ props.item['Nome'] }}</td>
-          <td>{{ props.item['DataNasc'] | formatDate }}</td>
-          <td>{{ props.item['Cidade'] }}</td>
-          <td>{{ props.item['UF'] }}</td>
-          <td>{{ props.item['CEP'] }}</td>
-          <td>{{ props.item['Status'] }}</td>
+          <tr @click="props.expanded = !props.expanded" style="cursor: pointer;">
+            <td v-for="(col, n) in headset" :key="n">{{ props.item[col.value] | format(col.format) }}</td>
+          </tr>
         </template>        
+        <template slot="expand" slot-scope="props">
+          <v-card flat>
+            <v-layout row>
+              <v-flex :class="ctrl['layout']" v-for="(ctrl, index) in detalhe" :key="index">
+                <v-text-label disabled :label="ctrl['label']" :value="props.item[index]"></v-text-label>
+              </v-flex>
+            </v-layout>
+          </v-card>
+        </template>
       </v-data-table>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import Detail from '../models/formelements.json'
+import VTextLabel from './VTextLabel'
+
 export default {
+
+  components:{
+    VTextLabel
+  },
+
   computed:{
     headset() {
       return [{
-            text: '',
+            format: '',
+            text: 'Tipo',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'TipoPessoa'
           },{
+            format: 'code',
             text: 'Código',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'Codigo'
           },{
+            format: 'cpfcnpj',
             text: 'CPF CNPJ',
             align: 'left',
             sortable: false,
             value: 'CpfCnpj'
           },{
+            format: '',
             text: 'Nome',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'Nome'
           },{
-            text: 'Data Nasc',
-            align: 'left',
-            sortable: false,
-            value: 'DataNasc'
-          },{
+            format: '',
             text: 'Cidade',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'Cidade'
           },{
+            format: '',
             text: 'UF',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'UF'
           },{
+            format: '',
             text: 'Cep',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'CEP'
           },{
+            format: '',
             text: 'Status',
             align: 'left',
-            sortable: false,
+            sortable: true,
             value: 'Status'
           }]
     },
 
     dataset() {
       return this.$store.getters.getClientesList || [];
+    },
+
+    detalhe() {
+      return Detail['person']
     }
   },
 

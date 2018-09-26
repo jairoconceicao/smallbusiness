@@ -9,7 +9,7 @@
   ]},
   { "title":"Serviços",   "route":"/", "icon":"fa fa-gear" },
   { "title":"Orçamentos", "route":"/", "icon":"fa fa-edit" },
-  { "title":"Agenda",     "route":"/", "icon":"fa fa-calendar" },
+  { "title":"Agenda",     "route":"/agenda", "icon":"fa fa-calendar" },
   { "title":"Relatórios", "icon":"fa fa-bar-chart", "children": [
     { "title":"Clientes",         "route":"/"},
     { "title":"Fornecedores",     "route":"/"},

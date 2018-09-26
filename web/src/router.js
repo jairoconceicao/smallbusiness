@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Clientes from './components/Clientes'
 import ClientesNew from './components/ClientesNew'
+import Agenda from './components/Agenda'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/clientes/new',
       name: 'Novo Cliente',
       component: ClientesNew
+    },
+    {
+      path: '/agenda',
+      name: 'Agenda',
+      component: Agenda
     },
     {
       path: '/about',

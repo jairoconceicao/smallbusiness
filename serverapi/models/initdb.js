@@ -70,7 +70,7 @@ docSchemas.forEach( schema => {
 
 db.getCollection('person').insertMany([
   {
-    Codigo				    : db.person.count() + 1,
+    Codigo				    : 1,
     Nome				      : "JUCELIA BEZERRA SOUSA GOMES" ,
     Fantasia		      : "" ,
     CpfCnpj			      : 4813577342,
@@ -107,7 +107,7 @@ db.getCollection('person').insertMany([
     flEmpresa		      : false
   },
   {
-    Codigo				    : db.person.count() + 1,
+    Codigo				    : 2,
     Nome				      : "KUCELIA CEZERRA TOUSA HOMES" ,
     Fantasia		      : "" ,
     CpfCnpj			      : 4813577342,
@@ -144,7 +144,7 @@ db.getCollection('person').insertMany([
     flEmpresa		      : false
   },
   {
-    Codigo				    : db.person.count() + 1,
+    Codigo				    : 3,
     Nome				      : "LUCELIA DEZERRA UOUSA IOMES" ,
     Fantasia		      : "" ,
     CpfCnpj			      : 4813577342,
@@ -181,7 +181,7 @@ db.getCollection('person').insertMany([
     flEmpresa		      : false
   },
   {
-    Codigo				    : db.person.count() + 1,
+    Codigo				    : 4,
     Nome				      : "MUCELIA FEZERRA VOUSA KOMES" ,
     Fantasia		      : "" ,
     CpfCnpj			      : 4813577342,
