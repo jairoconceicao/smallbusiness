@@ -6,17 +6,10 @@
       </v-btn>
       <v-card>
         <v-card-title color="orange" primary-title>
-          <h3 class="headline mb-0">Telefones</h3>
+          <h3 class="headline mb-0">E mails</h3>
         </v-card-title>
         <v-card-text>
-          <v-layout row>
-            <v-flex xs3>
-              <v-text-field label="DDD" v-model.number="telDDDItem" solo />
-            </v-flex>
-            <v-flex xs9>
-              <v-text-field label="Nro" v-model.number="telNroItem" solo />
-            </v-flex>
-          </v-layout>
+          <v-text-field label="E mail" v-model.trim="emailItem" solo />
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" flat @click.stop="save()">
@@ -33,35 +26,26 @@
 
 <script>
 export default {
-  name: 'add-telefone',
-
+  name: 'add-email',
   props: ['value'],
 
   data() {
     return {
       dialog: null,
-      telDDDItem: null,
-      telNroItem: null,
-      telefonesModel: []
+      emailItem: null,
+      emailModel: []
     }
   },
 
   methods: {
     save() {
-      this.telefonesModel.push({
-        ddd: this.telDDDItem,
-        nro: this.telNroItem
-      })
-      this.telDDDItem = null;
-      this.telNroItem = null;
-
-      this.$emit('input', this.telefonesModel)
+      this.emailModel.push(this.emailItem)
+      this.emailItem = null;
+      this.$emit('input', this.emailModel)
     },
 
     cancel() {
-      this.telDDDItem = null;
-      this.telNroItem = null;
-
+      this.emailItem = null;
       this.dialog = null;
     }
   }

@@ -2,16 +2,16 @@
   <v-layout row>
     <v-flex :class="ctrl['layout']" v-for="(ctrl, index) in formElements" :key="index">
       <v-switch v-if="ctrl['type'] === 'check'" :label="ctrl['label']" v-model="dataModel[index]"></v-switch>
-      <v-radio-group v-else-if="ctrl['type'] === 'radio'" :label="ctrl['label']" v-model="dataModel[index]">
+      <v-radio-group v-else-if="ctrl['type'] === 'radio'" :label="ctrl['label']" v-model="dataModel[index]" style="margin:0; border: solid 1px #ccc;">
         <v-radio
           v-for="(item, n) in ctrl['enum']"
           :key="n"
           :label="item"
-          :value="n"
+          :value="item"
         ></v-radio>
       </v-radio-group>
       <v-select v-else-if="ctrl['type'] === 'select'"
-        box
+        solo
         :items="ctrl['enum']"
         :label="ctrl['label']"
         v-model="dataModel[index]"
@@ -19,7 +19,6 @@
       <v-dialog v-else-if="ctrl['type'] === 'date'"
         ref="dialog"
         v-model="showPicker"
-        :return-value.sync="date"
         persistent
         lazy
         full-width
@@ -36,7 +35,7 @@
         <v-date-picker v-model="dataModel[index]" scrollable>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="showPicker = false">Cancel</v-btn>
-          <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+          <v-btn flat color="primary" @click="showPicker = false">OK</v-btn>
         </v-date-picker>
       </v-dialog>
       
@@ -46,6 +45,11 @@
         solo
       ></v-text-field>
 
+      <busca-cep v-else-if="ctrl['type'] === 'cep'" 
+        v-model="dataModel[index]"
+        @recoveryCep="onRecoveryCep"
+      ></busca-cep>
+
       <v-textarea v-else-if="ctrl['type'] === 'textarea'"
           v-model="dataModel[index]"
           solo
@@ -54,27 +58,76 @@
           value=""
         ></v-textarea>
 
-      <div v-else-if="ctrl['type'] === 'collection'">
-        <v-text-label :label="ctrl['label']"></v-text-label>
-        <table>
-          <tr v-for="(row, i) in dataModel[index]" :key="i">
-            <td v-for="(col, c) in row" :key="c">
-              {{col}}
-            </td>
-          </tr>
-        </table>
-        <v-dialog v-model="dialog" width="360">
-          <v-btn flat slot="activator">
-            <v-icon>fa fa-plus</v-icon>
-          </v-btn>
-          <v-card>
-            <v-card-title>
-              <p>Cadastre o Item aqui</p>
-              
-            </v-card-title>
-          </v-card>
-        </v-dialog>
-      </div>
+      <v-layout row v-else-if="ctrl['type'] === 'collectiontel'" style="outline: solid 1px #ccc;">
+        <v-flex xs2>
+          <label style="margin: 12px 12px; font-size: 16px;">
+            {{ctrl['label']}}
+          </label>
+        </v-flex>
+        <v-flex xs10 style="text-align: right;">
+          <add-telefone v-model="dataModel[index]"></add-telefone>
+        </v-flex>
+        <v-flex xs12>
+          <v-data-table
+            :headers="[
+              {text:'DDD', value:'ddd', sortable: false},
+              {text:'Nro', value:'nro', sortable: false}, 
+              {text:'Ações', value:'nro', sortable: false}, 
+            ]"
+            :items="dataModel[index]"
+            hide-actions
+          >
+            <template slot="items" slot-scope="props">
+              <td>{{props.item['ddd']}}</td>
+              <td>{{props.item['nro']}}</td>
+              <td class="justify-center layout px-0">
+                <v-icon
+                  small
+                  @click="dataModel[index].splice(dataModel[index].indexOf(props.item), 1)"
+                >
+                  fa fa-close
+                </v-icon>                                
+              </td>
+            </template>
+          </v-data-table>
+        </v-flex>
+      </v-layout>
+
+      <v-layout row v-else-if="ctrl['type'] === 'collectionmail'" style="outline: solid 1px #ccc;">
+        <v-flex xs2>
+          <label style="margin: 12px 12px; font-size: 16px;">
+            {{ctrl['label']}}
+          </label>
+        </v-flex>
+        <v-flex xs10 style="text-align: right;">
+          <add-email v-model="dataModel[index]"></add-email>
+        </v-flex>
+        <v-flex xs12>
+          <table style="width: 100%;">
+            <tr v-for="(row, i) in dataModel[index]" :key="i">
+              <td>{{row}}</td>
+            </tr>
+          </table>
+        </v-flex>
+      </v-layout>
+
+      <v-layout row v-else-if="ctrl['type'] === 'collectioncnae'" style="outline: solid 1px #ccc;">
+        <v-flex xs2>
+          <label style="margin: 12px 12px; font-size: 16px;">
+            {{ctrl['label']}}
+          </label>
+        </v-flex>
+        <v-flex xs10 style="text-align: right;">
+          <add-cnae v-model="dataModel[index]"></add-cnae>
+        </v-flex>
+        <v-flex xs12>
+          <table style="width: 100%;">
+            <tr v-for="(row, i) in dataModel[index]" :key="i">
+              <td>{{row}}</td>
+            </tr>
+          </table>
+        </v-flex>
+      </v-layout>
 
     </v-flex>
   </v-layout>
@@ -83,10 +136,20 @@
 <script>
 import Model from '../models/formelements.json'
 import VTextLabel from './VTextLabel'
+import AddTelefone from './AddTelefone'
+import AddEmail from './AddEmail'
+import AddCnae from './AddCnae'
+import BuscaCep from './BuscaCep'
 
 export default {
+  name: 'clientes-new',
+
   components:{
-    VTextLabel
+    VTextLabel, 
+    AddTelefone,
+    AddEmail,
+    AddCnae,
+    BuscaCep
   },
 
   computed: {
@@ -100,6 +163,16 @@ export default {
       showPicker: null,
       dialog: false,
       dataModel : { }
+    }
+  },
+
+  methods : {
+    onRecoveryCep(addr) {
+      this.dataModel['Endereco'] = addr['logradouro']
+      this.dataModel['Complemento'] = addr['complemento']
+      this.dataModel['Bairro'] = addr['bairro']
+      this.dataModel['Cidade'] = addr['localidade']
+      this.dataModel['UF'] = addr['uf']
     }
   }
 }

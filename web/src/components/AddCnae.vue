@@ -6,17 +6,10 @@
       </v-btn>
       <v-card>
         <v-card-title color="orange" primary-title>
-          <h3 class="headline mb-0">Telefones</h3>
+          <h3 class="headline mb-0">CNAE</h3>
         </v-card-title>
         <v-card-text>
-          <v-layout row>
-            <v-flex xs3>
-              <v-text-field label="DDD" v-model.number="telDDDItem" solo />
-            </v-flex>
-            <v-flex xs9>
-              <v-text-field label="Nro" v-model.number="telNroItem" solo />
-            </v-flex>
-          </v-layout>
+          <v-text-field label="Cnae" v-model.trim="cnaeItem" solo />
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" flat @click.stop="save()">
@@ -33,35 +26,26 @@
 
 <script>
 export default {
-  name: 'add-telefone',
-
+  name: 'add-cnae',
   props: ['value'],
 
   data() {
     return {
       dialog: null,
-      telDDDItem: null,
-      telNroItem: null,
-      telefonesModel: []
+      cnaeItem: null,
+      cnaeModel: []
     }
   },
 
   methods: {
     save() {
-      this.telefonesModel.push({
-        ddd: this.telDDDItem,
-        nro: this.telNroItem
-      })
-      this.telDDDItem = null;
-      this.telNroItem = null;
-
-      this.$emit('input', this.telefonesModel)
+      this.cnaeModel.push(this.cnaeItem);
+      this.cnaeItem = null;
+      this.$emit('input', this.cnaeModel);
     },
 
     cancel() {
-      this.telDDDItem = null;
-      this.telNroItem = null;
-
+      this.cnaeItem = null;
       this.dialog = null;
     }
   }

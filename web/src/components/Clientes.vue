@@ -32,6 +32,7 @@ import Detail from '../models/formelements.json'
 import VTextLabel from './VTextLabel'
 
 export default {
+  name: 'clientes',
 
   components:{
     VTextLabel
