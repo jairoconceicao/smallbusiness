@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", '*');
   next();  
 });
 
@@ -26,6 +27,14 @@ app.get('/cliente', function(req, res){
 
 app.post('/cliente/new', function(req, res){
   clienteController.create(req, res);
+});
+
+app.post('/cliente/edit/:id', function(req, res){
+  clienteController.edit(req, res);
+});
+
+app.delete('/cliente/del/:id', function(req, res){
+  clienteController.delete(req, res);
 });
 
 app.listen(port);

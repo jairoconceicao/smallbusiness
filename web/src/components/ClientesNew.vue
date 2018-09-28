@@ -128,7 +128,19 @@
           </table>
         </v-flex>
       </v-layout>
-
+    </v-flex>
+    <v-flex xs12 sm12 md12 lg12>
+      <v-btn @click.stop.prevent="fakeData()">
+        Fake Data
+      </v-btn>
+      <v-btn @click.stop.prevent="save()">
+        <v-icon>fa fa-check</v-icon>
+        Salvar
+      </v-btn>
+      <v-btn>
+        <v-icon>fa fa-close</v-icon>
+        Limpar
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -173,6 +185,47 @@ export default {
       this.dataModel['Bairro'] = addr['bairro']
       this.dataModel['Cidade'] = addr['localidade']
       this.dataModel['UF'] = addr['uf']
+    },
+
+    save() {
+      this.$store.dispatch('saveCliente', this.dataModel)
+    },
+
+    fakeData() {
+      this.dataModel = {
+        "Codigo"			      : 123456,
+        "Nome"				      : "Jairo Pereira da Conceição",
+        "Fantasia"		      : "Jairo Conceição",
+        "CpfCnpj"			      : 88139735000,
+        "IE"				        : "",
+        "IM"				        : "",
+        "TipoPessoa"	      : "Fisica",
+        "Status"			      : "Regular",
+        "StatusFiscal"		  : "Sem Restrição",
+        "TipoContribuinte"	: "",
+        "DataNasc"			    : "1975-11-06",
+        "CEP"				        : 94940110,
+        "Endereco"		      : "Rua Guaiana, 580",
+        "Complemento"		    : "Apto 106",
+        "Pais"				      : "Brasil",
+        "UF"			  	      : "RS",
+        "Cidade"			      : "Cachoeirinha",
+        "Bairro"			      : "Monte Carlo",
+        "HomePage"			    : "",
+        "Telefone"          : [{"ddd":51, "nro":981368881}],
+        "Email"				      : ["jairoconceicao@gmail.com"],
+        "Cnae"				      : [],
+        "tpRgmTrib"			    : "",
+        "Produtor"		      : false,
+        "Consumidor"	      : true,
+        "Coligada"		      : false,
+        "Cooperativa"	      : false,
+        "flCliente"			    : true,
+        "flFornecedor"		  : false,
+        "flTransp"			    : false,
+        "flRepres"			    : false,
+        "flEmpresa"		      : false
+      }
     }
   }
 }

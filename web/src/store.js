@@ -9,7 +9,11 @@ export default new Vuex.Store({
     clientes_list: [],
 
     cepAddr: {},
+
+    /* Loading */
+    clienteLoading: false,
     cepLoading: false
+
   },
 
   getters: {
@@ -21,6 +25,7 @@ export default new Vuex.Store({
   mutations: {
     setClientesList: (state, data) => state.clientes_list = data,
     setCepAddr: (state, data) => state.cepAddr = data,
+    setClienteLoading: (state, loading) => state.clienteLoading = loading,
     setCepLoading: (state, loading) => state.cepLoading = loading
   },
 
@@ -28,6 +33,42 @@ export default new Vuex.Store({
     getClientesListAction({commit}) {
       axios.get('http://localhost:3000/cliente')
       .then( (response) => commit('setClientesList', response.data) )
+    },
+
+    saveCliente({commit}, postobject) {
+      commit('setClienteLoading', true)
+      axios.post('http://localhost:3000/cliente/new', postobject)
+      .then( (response) => {
+        commit('setClientesList', response.data);
+        commit('setClienteLoading', false);
+      }).catch( (error) => {
+        console.log(error.message)
+        commit('setClienteLoading', false);
+      })
+    },
+
+    putCliente({commit}, postobject) {
+      commit('setClienteLoading', true)
+      axios.post(`http://localhost:3000/cliente/edit/${postobject._id}`, postobject)
+      .then( (response) => {
+        commit('setClientesList', response.data);
+        commit('setClienteLoading', false);
+      }).catch( (error) => {
+        console.log(error.message)
+        commit('setClienteLoading', false);
+      })
+    },
+
+    deleteCliente({commit}, codigo) {
+      commit('setClienteLoading', true)
+      axios.delete(`http://localhost:3000/cliente/del/${codigo}`)
+      .then( (response) => {
+        commit('setClientesList', response.data);
+        commit('setClienteLoading', false);
+      }).catch( (error) => {
+        console.log(error.message)
+        commit('setClienteLoading', false)
+      })
     },
 
     getCep({commit}, cep) {
@@ -50,7 +91,6 @@ export default new Vuex.Store({
           commit('setCepLoading', false)
           resolve({});
         }
-
       });
     }
   }

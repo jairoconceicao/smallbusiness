@@ -7,7 +7,7 @@
           <v-icon>fa fa-plus</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-data-table :items="dataset" :headers="headset" item-key="Codigo">
+      <v-data-table :items="dataset" :headers="headset" item-key="_id">
         <template slot="items" slot-scope="props">
           <tr @click="props.expanded = !props.expanded" style="cursor: pointer;">
             <td v-for="(col, n) in headset" :key="n">{{ props.item[col.value] | format(col.format) }}</td>
@@ -16,6 +16,11 @@
         <template slot="expand" slot-scope="props">
           <v-card flat>
             <v-layout row>
+              <v-flex xs12 align-right>
+                <v-btn @click="deleteItem(props.item)">
+                  Excluir
+                </v-btn>
+              </v-flex>
               <v-flex :class="ctrl['layout']" v-for="(ctrl, index) in detalhe" :key="index">
                 <v-text-label disabled :label="ctrl['label']" :value="props.item[index]"></v-text-label>
               </v-flex>
@@ -97,6 +102,12 @@ export default {
 
     detalhe() {
       return Detail['person']
+    }
+  },
+
+  methods: {
+    deleteItem(item) {
+      this.$store.dispatch('deleteCliente', item['_id']);
     }
   },
 
