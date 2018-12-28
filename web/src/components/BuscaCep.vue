@@ -1,9 +1,9 @@
 <template>
   <v-text-field 
     ref="inputCep"
-    solo
     clearable
     :loading="$store.getters.getCepLoading"
+    :placeholder="' '"
     label="CEP"
     append-icon="fa fa-search" 
     @click:append.stop.prevent="search()"

@@ -11,7 +11,7 @@
         ></v-radio>
       </v-radio-group>
       <v-select v-else-if="ctrl['type'] === 'select'"
-        solo
+        :placeholder="' '"
         :items="resolveEnum(ctrl['enum'])"
         :label="ctrl['label']"
         v-model="dataModel[index]"
@@ -28,8 +28,8 @@
           slot="activator"
           v-model="dataModel[index]"
           :label="ctrl['label']"
+          :placeholder="' '"
           append-icon="fa fa-calendar"
-          solo
           readonly
         ></v-text-field>
         <v-date-picker v-model="dataModel[index]" scrollable>
@@ -42,7 +42,7 @@
       <v-text-field v-else-if="ctrl['type'] === 'text'"
         v-model="dataModel[index]"
         :label="ctrl['label']"
-        solo
+        :placeholder="' '"
       ></v-text-field>
 
       <busca-cep v-else-if="ctrl['type'] === 'cep'" 
@@ -52,9 +52,9 @@
 
       <v-textarea v-else-if="ctrl['type'] === 'textarea'"
           v-model="dataModel[index]"
-          solo
           name="input-7-4"
           :label="ctrl['label']"
+          :placeholder="' '"
           value=""
         ></v-textarea>
 
@@ -199,6 +199,7 @@ export default {
       this.dataModel['Bairro'] = addr['bairro']
       this.dataModel['Cidade'] = addr['localidade']
       this.dataModel['UF'] = addr['uf']
+      this.dataModel['Pais'] = 'Brasil'
     },
 
     save() {

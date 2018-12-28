@@ -1,11 +1,11 @@
 [
   { "title":"Home",       "route":"/", "icon":"fa fa-home" },
-  { "title":"Cadastro", "icon":"fa fa-user",   "children": [
-    { "title":"Clientes",         "route":"/clientes"},
-    { "title":"Fornecedores",     "route":"/"},
-    { "title":"Transportadoras",  "route":"/"},
-    { "title":"Mercadorias",      "route":"/"},
-    { "title":"Itens de Serviço", "route":"/"}
+  { "title":"Cadastro", "icon":"fa fa-folder-open",   "children": [
+    { "title":"Clientes",         "route":"/clientes", "icon":"fa fa-user" },
+    { "title":"Fornecedores",     "route":"/", "icon":"fa fa-industry" },
+    { "title":"Transportadoras",  "route":"/", "icon":"fa fa-truck" },
+    { "title":"Mercadorias",      "route":"/", "icon":"fa fa-barcode" },
+    { "title":"Itens de Serviço", "route":"/", "icon":"fa fa-ticket" }
   ]},
   { "title":"Serviços",   "route":"/", "icon":"fa fa-gear" },
   { "title":"Orçamentos", "route":"/", "icon":"fa fa-edit" },
