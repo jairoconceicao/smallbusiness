@@ -12,14 +12,18 @@ export default new Vuex.Store({
 
     /* Loading */
     clienteLoading: false,
-    cepLoading: false
+    cepLoading: false,
+
+    MESSAGE: null
 
   },
 
   getters: {
-    getClientesList: (state) => { return state.clientes_list },
-    getCepAddr: (state) => { return state.cepAddr },
-    getCepLoading: (state) => { return state.cepLoading }
+    getClientesList: (state) => state.clientes_list,
+    getCepAddr: (state) => state.cepAddr,
+    getCepLoading: (state) => state.cepLoading,
+    loading: state => state.clienteLoading,
+    messageapp: state => state.MESSAGE
   },
 
   mutations: {
@@ -31,8 +35,15 @@ export default new Vuex.Store({
 
   actions: {
     getClientesListAction({commit}) {
+      commit('setClienteLoading', true)
       axios.get('http://localhost:3000/cliente')
-      .then( (response) => commit('setClientesList', response.data) )
+      .then( response => {
+        commit('setClientesList', response.data)
+        commit('setClienteLoading', false)
+      }).catch( (error) => {
+        console.log(error.message)
+        commit('setClienteLoading', false);
+      })
     },
 
     saveCliente({commit}, postobject) {

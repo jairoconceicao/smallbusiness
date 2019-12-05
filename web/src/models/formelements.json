@@ -1,8 +1,8 @@
 {
   "person":{
     "Codigo"				    : { "label":"Código",             "type":"text",        "layout":"col-xl-2" },
-    "Nome"				      : { "label":"Nome ou Razão",      "type":"text",        "layout":"col-xl-5" },
-    "Fantasia"		      : { "label":"Nome de Fantasia",   "type":"text",        "layout":"col-xl-5" },
+    "Nome"				      : { "label":"Nome ou Razão",      "type":"text",        "layout":"col-xl-3" },
+    "Fantasia"		      : { "label":"Nome de Fantasia",   "type":"text",        "layout":"col-xl-3" },
     "CpfCnpj"			      : { "label":"CPF/CNPJ",           "type":"text",        "layout":"col-xl-4" },
     "IE"				        : { "label":"Inscr. Estatual",    "type":"text",        "layout":"col-xl-4" },
     "IM"				        : { "label":"Inscr. Municipal",   "type":"text",        "layout":"col-xl-4" },

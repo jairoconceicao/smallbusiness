@@ -17,8 +17,11 @@
           <v-card flat>
             <v-layout row>
               <v-flex xs12 align-right>
-                <v-btn @click="deleteItem(props.item)">
-                  Excluir
+                <v-btn flat @click="editItem(props.item)">
+                  <v-icon>fa fa-edit</v-icon>
+                </v-btn>
+                <v-btn flat @click="deleteItem(props.item)">
+                  <v-icon>fa fa-close</v-icon>
                 </v-btn>
               </v-flex>
               <v-flex :class="ctrl['layout']" v-for="(ctrl, index) in detalhe" :key="index">
@@ -106,6 +109,10 @@ export default {
   },
 
   methods: {
+    editItem(item) {
+      //this.$store.dispatch('deleteCliente', item['_id']);
+    },
+
     deleteItem(item) {
       this.$store.dispatch('deleteCliente', item['_id']);
     }

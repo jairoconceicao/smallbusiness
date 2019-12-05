@@ -12,7 +12,7 @@
       <v-list-tile-action>
         <v-icon>{{ child['icon'] }}</v-icon>
       </v-list-tile-action>
-      <v-list-tile-title>{{ child['title'] }}</v-list-tile-title>
+      <v-list-tile-sub-title>{{ child['title'] }}</v-list-tile-sub-title>
     </v-list-tile>            
   </v-list-group>
   <v-list-tile v-else  @click="goPage(item['route'])">
