@@ -1,5 +1,6 @@
 {
   "person":{
+<<<<<<< HEAD
     "Codigo"				    : { "label":"Código",             "type":"text",        "layout":"col-xl-2" },
     "Nome"				      : { "label":"Nome ou Razão",      "type":"text",        "layout":"col-xl-3" },
     "Fantasia"		      : { "label":"Nome de Fantasia",   "type":"text",        "layout":"col-xl-3" },
@@ -20,17 +21,39 @@
     "Bairro"			      : { "label":"Bairro",             "type":"text",        "layout":"col-xl-4" },
     "HomePage"				  : { "label":"Site",               "type":"text",        "layout":"col-xl-12" },
     "Telefone"          : { "label":"Telefone",           "type":"collectiontel",  "layout":"col-xl-4" },
+=======
+    "Codigo"				    : { "label":"Código",             "type":"text",            "layout":"col-xl-2" },
+    "Nome"				      : { "label":"Nome ou Razão",      "type":"text",            "layout":"col-xl-5" },
+    "Fantasia"		      : { "label":"Nome de Fantasia",   "type":"text",            "layout":"col-xl-5" },
+    "CpfCnpj"			      : { "label":"CPF/CNPJ",           "type":"text",            "layout":"col-xl-4" },
+    "IE"				        : { "label":"Inscr. Estatual",    "type":"text",            "layout":"col-xl-4" },
+    "IM"				        : { "label":"Inscr. Municipal",   "type":"text",            "layout":"col-xl-4" },
+    "TipoPessoa"				: { "label":"Tipo",               "type":"radio",           "layout":"col-xl-2", "enum":"TipoPessoaTable" },
+    "Status"				    : { "label":"Status",             "type":"select",          "layout":"col-xl-2", "enum":"StatusPessoaTable" },
+    "StatusFiscal"			: { "label":"St. Fiscal",         "type":"select",          "layout":"col-xl-2", "enum":"StatusFiscalTable" },
+    "TipoContribuinte"	: { "label":"Contribuinte",       "type":"select",          "layout":"col-xl-2" },
+    "DataNasc"				  : { "label":"Data Nasc.",         "type":"date",            "layout":"col-xl-2" },
+    "CEP"				        : { "label":"CEP",                "type":"cep",             "layout":"col-xl-2" },
+    "Endereco"		      : { "label":"Endereço",           "type":"textarea",        "layout":"col-xl-6" },
+    "Complemento"				: { "label":"Complemento",        "type":"textarea",        "layout":"col-xl-6" },
+    "Pais"				      : { "label":"País",               "type":"text",            "layout":"col-xl-3" },
+    "UF"			  	      : { "label":"UF",                 "type":"select",          "layout":"col-xl-1", "enum":"UfTable" },
+    "Cidade"			      : { "label":"Cidade",             "type":"text",            "layout":"col-xl-4" },
+    "Bairro"			      : { "label":"Bairro",             "type":"text",            "layout":"col-xl-4" },
+    "HomePage"				  : { "label":"Site",               "type":"text",            "layout":"col-xl-12" },
+    "Telefone"          : { "label":"Telefone",           "type":"collectiontel",   "layout":"col-xl-4" },
+>>>>>>> 476996b035c4844290cbe2117d96813dbf382638
     "Email"				      : { "label":"E-mail",             "type":"collectionmail",  "layout":"col-xl-4" },
     "Cnae"				      : { "label":"CNAE",               "type":"collectioncnae",  "layout":"col-xl-4" },
-    "tpRgmTrib"			    : { "label":"Regime Trib.",       "type":"",            "layout":"col-xl-12" },
-    "Produtor"		      : { "label":"Produtor Rural",     "type":"check",       "layout":"col-xl-4" },
-    "Consumidor"	      : { "label":"Consumidor",         "type":"check",       "layout":"col-xl-4" },
-    "Coligada"		      : { "label":"Coligada",           "type":"check",       "layout":"col-xl-4" },
-    "Cooperativa"	      : { "label":"Cooperativa",        "type":"check",       "layout":"col-xl-4" },
-    "flCliente"				  : { "label":"Cliente",            "type":"check",       "layout":"col-xl-4" },
-    "flFornecedor"			: { "label":"Fornecedor",         "type":"check",       "layout":"col-xl-4" },
-    "flTransp"			    : { "label":"Transportador",      "type":"check",       "layout":"col-xl-4" },
-    "flRepres"			    : { "label":"Representante",      "type":"check",       "layout":"col-xl-4" },
-    "flEmpresa"		      : { "label":"Empresa",            "type":"check",       "layout":"col-xl-4" }
+    "tpRgmTrib"			    : { "label":"Regime Trib.",       "type":"select",          "layout":"col-xl-12", "enum":"TipoRegimeTribTable" },
+    "Produtor"		      : { "label":"Produtor Rural",     "type":"check",           "layout":"col-xl-4" },
+    "Consumidor"	      : { "label":"Consumidor",         "type":"check",           "layout":"col-xl-4" },
+    "Coligada"		      : { "label":"Coligada",           "type":"check",           "layout":"col-xl-4" },
+    "Cooperativa"	      : { "label":"Cooperativa",        "type":"check",           "layout":"col-xl-4" },
+    "flCliente"				  : { "label":"Cliente",            "type":"check",           "layout":"col-xl-4" },
+    "flFornecedor"			: { "label":"Fornecedor",         "type":"check",           "layout":"col-xl-4" },
+    "flTransp"			    : { "label":"Transportador",      "type":"check",           "layout":"col-xl-4" },
+    "flRepres"			    : { "label":"Representante",      "type":"check",           "layout":"col-xl-4" },
+    "flEmpresa"		      : { "label":"Empresa",            "type":"check",           "layout":"col-xl-4" }
   }
 }

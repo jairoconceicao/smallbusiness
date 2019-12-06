@@ -4,15 +4,15 @@
       <v-switch v-if="ctrl['type'] === 'check'" :label="ctrl['label']" v-model="dataModel[index]"></v-switch>
       <v-radio-group v-else-if="ctrl['type'] === 'radio'" :label="ctrl['label']" v-model="dataModel[index]" style="margin:0; border: solid 1px #ccc;">
         <v-radio
-          v-for="(item, n) in ctrl['enum']"
+          v-for="(item, n) in resolveEnum(ctrl['enum'])"
           :key="n"
-          :label="item"
-          :value="item"
+          :label="item['text']"
+          :value="item['value']"
         ></v-radio>
       </v-radio-group>
       <v-select v-else-if="ctrl['type'] === 'select'"
-        solo
-        :items="ctrl['enum']"
+        :placeholder="' '"
+        :items="resolveEnum(ctrl['enum'])"
         :label="ctrl['label']"
         v-model="dataModel[index]"
       ></v-select>      
@@ -28,8 +28,8 @@
           slot="activator"
           v-model="dataModel[index]"
           :label="ctrl['label']"
+          :placeholder="' '"
           append-icon="fa fa-calendar"
-          solo
           readonly
         ></v-text-field>
         <v-date-picker v-model="dataModel[index]" scrollable>
@@ -42,7 +42,7 @@
       <v-text-field v-else-if="ctrl['type'] === 'text'"
         v-model="dataModel[index]"
         :label="ctrl['label']"
-        solo
+        :placeholder="' '"
       ></v-text-field>
 
       <busca-cep v-else-if="ctrl['type'] === 'cep'" 
@@ -52,9 +52,9 @@
 
       <v-textarea v-else-if="ctrl['type'] === 'textarea'"
           v-model="dataModel[index]"
-          solo
           name="input-7-4"
           :label="ctrl['label']"
+          :placeholder="' '"
           value=""
         ></v-textarea>
 
@@ -152,9 +152,12 @@ import AddTelefone from './AddTelefone'
 import AddEmail from './AddEmail'
 import AddCnae from './AddCnae'
 import BuscaCep from './BuscaCep'
+import util from '../mixins/util'
 
 export default {
   name: 'clientes-new',
+
+  mixins: [ util ],
 
   components:{
     VTextLabel, 
@@ -179,12 +182,24 @@ export default {
   },
 
   methods : {
+    resolveEnum(venum) {
+      switch(venum) {
+        case "UfTable"              : return this.UfTable; break;
+        case "PaisTable"            : return this.PaisTable; break;
+        case "TipoPessoaTable"      : return this.TipoPessoaTable; break;
+        case "StatusPessoaTable"    : return this.StatusPessoaTable; break;
+        case "StatusFiscalTable"    : return this.StatusFiscalTable; break;
+        case "TipoRegimeTribTable"  : return this.TipoRegimeTribTable; break;
+      }
+    },
+
     onRecoveryCep(addr) {
       this.dataModel['Endereco'] = addr['logradouro']
       this.dataModel['Complemento'] = addr['complemento']
       this.dataModel['Bairro'] = addr['bairro']
       this.dataModel['Cidade'] = addr['localidade']
       this.dataModel['UF'] = addr['uf']
+      this.dataModel['Pais'] = 'Brasil'
     },
 
     save() {
